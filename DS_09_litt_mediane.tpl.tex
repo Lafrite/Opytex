@@ -1,0 +1,70 @@
+\documentclass[a4paper,10pt]{/media/documents/Cours/Prof/Enseignements/tools/style/classDS}
+\usepackage{/media/documents/Cours/Prof/Enseignements/2013_2014}
+
+% Title Page
+\titre{Calcul littéral et statistiques}
+% \quatreC \quatreD \troisB \troisPro
+\classe{\troisB}
+\date{26 septemble 2013}
+% DS DSCorr DM DMCorr Corr
+\typedoc{DS}
+\duree{1 heure}
+\sujet{%{{infos.subj%}}}
+
+
+\begin{document}
+\maketitle
+
+\Calc
+Le barème est donné à titre indicatif, il pourra être modifié.
+
+\begin{Exo}[4.5]
+		Développer et réduire les expressions suivantes:
+		\begin{equation*}
+				A = %{{random.randint(1,9) %}}x (-%{{random.randint(1,9) %}}x + %{{random.randint(1,9) %}} )\qquad 
+				B = (%{{random.randint(1,9) %}}x + %{{random.randint(1,9) %}})(-%{{random.randint(1,9) %}}x + %{{random.randint(1,9) %}}) \qquad 
+				C = %{{random.randint(1,9) %}}x (-x + 1) + (%{{random.randint(1,9) %}}x + %{{random.randint(1,9) %}})(x - 4)
+		\end{equation*}
+\end{Exo}
+
+\begin{Exo}[4]
+			On cherche à évaluer l'aire du rectangle suivant:
+			\begin{center}
+					\includegraphics[scale=0.3]{fig/rectangle}
+			\end{center}
+			\begin{enumerate}[a.]
+					\item En fonction de $x$, déterminer la hauteur puis la largeur du rectangle.
+					\item Exprimer l'aire du rectangle en fonction de $x$.
+					\item Réduire l'expression de l'aire.
+					\item Évaluer l'aire du rectangle quand $x = %{{random.randint(1,9) %}}$.
+			\end{enumerate}
+\end{Exo}
+
+\begin{Exo}[6]
+		Factoriser, en soulignant le terme commun, les expressions suivantes:
+		\begin{equation*}
+				A = 6x + 12 \qquad B = 21x + 7 \qquad C = 10x^2 - 5x + 25 \qquad D = 16x^2 - 24x
+		\end{equation*}
+\end{Exo}
+
+\begin{Exo}[5.5]
+		Voici les performances en saut en hauteur d'une classe de troisième. Les hauteurs sont données en centimètres.
+		\begin{equation*}
+				%{{ random.hauteurs() %}}
+		\end{equation*}
+		\begin{enumerate}[a.]
+				\item Quel est l'effectif total de cette série?
+				\item Quelle est l'étendue de cette série?
+				\item Déterminer la performance moyenne (notée $M$) des élèves de cette classe (On arrondira le résultat à l'unité).
+				\item Déterminer une performance médiane (notée $Me$).
+		\end{enumerate}
+
+\end{Exo}
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End:
+
