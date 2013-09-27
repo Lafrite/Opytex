@@ -2,16 +2,8 @@
 # encoding: utf-8
 
 import jinja2, random, os
-
-report_renderer = jinja2.Environment(
-  block_start_string = '%{',
-  block_end_string = '%}',
-  variable_start_string = '%{{',
-  variable_end_string = '%}}',
-  loader = jinja2.FileSystemLoader(os.path.abspath('.'))
-)
-
-template = report_renderer.get_template('./DS_09_litt_mediane.tpl.tex')
+import sys
+import optparse
 
 def randfloat(approx = 1, low = 0, up = 10):
 		""" return a random number between low and up with approx floating points """
@@ -34,12 +26,47 @@ random.randfloat = randfloat
 random.gaussRandomlist = gaussRandomlist
 random.hauteurs = hauteurs
 
-for subj in ["A"]:
-    dest = 'DS_09_litt_mediane_{subj}.tex'.format(subj = subj)
-    with open( dest, 'w') as f:
-            f.write(template.render(random = random, infos = {"subj" : subj}))
-    os.system("pdflatex " + dest)
-    os.system("rm *.aux *.log")
+report_renderer = jinja2.Environment(
+block_start_string = '%{',
+block_end_string = '%}',
+variable_start_string = '%{{',
+variable_end_string = '%}}',
+loader = jinja2.FileSystemLoader(os.path.abspath('.'))
+)
+
+def main(options):
+    template = report_renderer.get_template(options.template)
+
+    if options.output:
+        output_basename = options.output
+    else:
+        tpl_base = os.path.splitext(options.template)[0]
+        output_basename = tpl_base + "_"
+
+
+    for subj in range(options.num_subj):
+        subj = subj+1
+        dest = output_basename + str(subj) + '.tex'
+        with open( dest, 'w') as f:
+                f.write(template.render(random = random, infos = {"subj" : subj}))
+        os.system("pdflatex " + dest)
+        os.system("rm *.aux *.log")
+
+if __name__ == '__main__':
+
+
+    parser = optparse.OptionParser()
+    parser.add_option("-t","--tempalte",action="store",type="string",dest="template", help="File with template")
+    parser.add_option("-o","--output",action="store",type="string",dest="output",help="Base name for output (without .tex or any extension))")
+    parser.add_option("-n","--number_subjects", action="store",type="int", dest="num_subj", default = 2, help="The number of subjects to make")
+
+    (options, args) = parser.parse_args()
+
+    if not options.template:
+        print("I need a template!")
+        sys.exit(0)
+
+    main(options)
 
 # -----------------------------
 # Reglages pour 'vim'
