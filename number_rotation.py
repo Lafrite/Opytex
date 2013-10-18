@@ -12,6 +12,8 @@ def randfloat(approx = 1, low = 0, up = 10):
 		ans = round(ans, approx)
 		return ans 
 
+random.randfloat = randfloat
+
 def gaussRandomlist(mu = 0, sigma = 1, size = 10, manip = lambda x:x):
     """ return a list of a gaussian sample """
     ans = []
@@ -19,12 +21,13 @@ def gaussRandomlist(mu = 0, sigma = 1, size = 10, manip = lambda x:x):
         ans += [manip(random.gauss(mu,sigma))]
     return ans
 
-def hauteurs(num = 15):
-    return " ;\\quad ".join(gaussRandomlist(mu = 120, sigma = 10, size = 15, manip = lambda x: str(int(x))))
-
-random.randfloat = randfloat
 random.gaussRandomlist = gaussRandomlist
-random.hauteurs = hauteurs
+
+def gaussRandomlist_strInt(mu = 0, sigma = 1, size = 10):
+    return gaussRandomlist(mu, sigma, size, manip = lambda x: str(int(x)))
+
+random.gaussRandomlist_strInt = gaussRandomlist_strInt
+
 
 report_renderer = jinja2.Environment(
 block_start_string = '%{',
@@ -50,7 +53,9 @@ def main(options):
         with open( dest, 'w') as f:
                 f.write(template.render(random = random, infos = {"subj" : subj}))
         os.system("pdflatex " + dest)
-        os.system("rm *.aux *.log")
+
+        if not options.dirty:
+            os.system("rm *.aux *.log")
 
 if __name__ == '__main__':
 
@@ -59,6 +64,7 @@ if __name__ == '__main__':
     parser.add_option("-t","--tempalte",action="store",type="string",dest="template", help="File with template")
     parser.add_option("-o","--output",action="store",type="string",dest="output",help="Base name for output (without .tex or any extension))")
     parser.add_option("-n","--number_subjects", action="store",type="int", dest="num_subj", default = 2, help="The number of subjects to make")
+    parser.add_option("-d","--dirty", action="store_true", dest="dirty", help="Do not clean after compilation")
 
     (options, args) = parser.parse_args()
 
