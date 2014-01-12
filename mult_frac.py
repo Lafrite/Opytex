@@ -11,9 +11,9 @@ Types of multiplications
 
 1 -> a x b / c
 2 -> a x b / c + d / c
-3 -> a x b / c + d / e
-4 -> e / f x g / h
-5 -> i / j x k / l
+3 -> a x b / c + d / e >>> TODO
+4 -> e / f x g / h >>> TODO
+5 -> i / j x k / l >>> TODO
 
 where:
     a integer differente from -1, 0, 1
