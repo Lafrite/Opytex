@@ -4,6 +4,7 @@
 import jinja2, random, os
 import sys
 import optparse
+from rd_frac import frac
 
 def randfloat(approx = 1, low = 0, up = 10):
 		""" return a random number between low and up with approx floating points """
@@ -28,6 +29,8 @@ def gaussRandomlist_strInt(mu = 0, sigma = 1, size = 10):
 
 random.gaussRandomlist_strInt = gaussRandomlist_strInt
 
+random.frac = frac
+
 
 report_renderer = jinja2.Environment(
 block_start_string = '%{',
@@ -40,22 +43,31 @@ loader = jinja2.FileSystemLoader(os.path.abspath('.'))
 def main(options):
     template = report_renderer.get_template(options.template)
 
+    cwd = os.getcwd()
+
     if options.output:
-        output_basename = options.output
+        output_name = options.output
     else:
         tpl_base = os.path.splitext(options.template)[0]
-        output_basename = tpl_base + "_"
+        output_name = tpl_base + "_"
+    
+    output_dir = os.path.dirname(output_name)
+    output_basename = os.path.basename(output_name)
+    output_tplname = output_basename.split("/")[-1]
 
+    os.chdir(output_dir)
 
     for subj in range(options.num_subj):
         subj = subj+1
-        dest = output_basename + str(subj) + '.tex'
+        dest = output_tplname + str(subj) + '.tex'
         with open( dest, 'w') as f:
                 f.write(template.render(random = random, infos = {"subj" : subj}))
         os.system("pdflatex " + dest)
 
         if not options.dirty:
             os.system("rm *.aux *.log")
+
+    os.chdir(cwd)
 
 if __name__ == '__main__':
 
