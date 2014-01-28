@@ -5,6 +5,7 @@ import jinja2, random, os
 import sys
 import optparse
 from rd_frac import frac
+from pythagore import pythagore_triplet
 
 def randfloat(approx = 1, low = 0, up = 10):
 		""" return a random number between low and up with approx floating points """
@@ -30,6 +31,9 @@ def gaussRandomlist_strInt(mu = 0, sigma = 1, size = 10):
 random.gaussRandomlist_strInt = gaussRandomlist_strInt
 
 random.frac = frac
+random.pythagore = pythagore_triplet
+
+
 
 
 report_renderer = jinja2.Environment(
