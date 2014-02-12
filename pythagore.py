@@ -23,6 +23,11 @@ def pythagore_triplet(v_min = 1, v_max = 10):
 if __name__ == '__main__':
     print(pythagore_triplet())
 
+    for j in range(1,10):
+        for i in range(j,10):
+            print((i**2-j**2 , 2*i*j, i**2 + j**2))
+
+
 
 
 
