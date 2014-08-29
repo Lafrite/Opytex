@@ -31,7 +31,7 @@ def main(options):
         # Template should be named tpl_... tpl will replace by the number/name of the version
         output =  path(template_file.dirname()) / path(template_file.name[3:])
 
-    if output.dirname != "":
+    if output.dirname() != "":
         output.dirname().cd()
 
     output = output.name
@@ -53,7 +53,7 @@ if __name__ == '__main__':
 
 
     parser = optparse.OptionParser()
-    parser.add_option("-t","--tempalte",action="store",type="string",dest="template", help="File with template")
+    parser.add_option("-t","--tempalte",action="store",type="string",dest="template", help="File with the template. The name should have the following form tpl_... .")
     parser.add_option("-o","--output",action="store",type="string",dest="output",help="Base name for output )")
     parser.add_option("-n","--number_subjects", action="store",type="int", dest="num_subj", default = 1, help="The number of subjects to make")
     parser.add_option("-d","--dirty", action="store_true", dest="dirty", help="Do not clean after compilation")
