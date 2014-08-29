@@ -1,0 +1,4 @@
+Jinja2==2.7.3
+MarkupSafe==0.23
+path.py==5.2
+-e git+gitolite:pyMath@0fa194848dc07dcc9834ace88352a5485aa7f166#egg=pyMath-dev
