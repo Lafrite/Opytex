@@ -4,48 +4,48 @@
 import jinja2, random, os
 import sys
 import optparse
-from rd_frac import frac
-from pythagore import pythagore_triplet
+from pymath.random_expression import RdExpression
 
-def randfloat(approx = 1, low = 0, up = 10):
-		""" return a random number between low and up with approx floating points """
-		ans = random.random()
-		ans = ans*(up - low) + low
-		ans = round(ans, approx)
-		return ans 
-
-random.randfloat = randfloat
-
-def gaussRandomlist(mu = 0, sigma = 1, size = 10, manip = lambda x:x):
-    """ return a list of a gaussian sample """
-    ans = []
-    for i in range(size):
-        ans += [manip(random.gauss(mu,sigma))]
-    return ans
-
-random.gaussRandomlist = gaussRandomlist
-
-def gaussRandomlist_strInt(mu = 0, sigma = 1, size = 10):
-    return gaussRandomlist(mu, sigma, size, manip = lambda x: str(int(x)))
-
-random.gaussRandomlist_strInt = gaussRandomlist_strInt
-
-random.frac = frac
-random.pythagore = pythagore_triplet
-
-
-
-
-report_renderer = jinja2.Environment(
-block_start_string = '%{',
-block_end_string = '%}',
-variable_start_string = '%{{',
-variable_end_string = '%}}',
-loader = jinja2.FileSystemLoader(os.path.abspath('.'))
+#texenv = jinja2.Environment(
+#    block_start_string = '%{',
+#    block_end_string = '%}',
+#    variable_start_string = '%{{',
+#    variable_end_string = '%}}',
+#    loader = jinja2.FileSystemLoader(os.path.abspath('.'))
+#)
+texenv = jinja2.Environment(
+    block_start_string = '\Block{',
+    # Gros WTF!! Si on le met en maj ça ne marche pas alors que c'est en maj dans le template...
+    block_end_string = '}',
+    variable_start_string = '\Var{',
+    variable_end_string = '}',
+    loader = jinja2.FileSystemLoader(os.path.abspath('.'))
 )
 
+# The environment
+#report_renderer = jinja2.Environment(
+#    block_start_string = '\BLOCK{',
+#    block_end_string = '}',
+#    variable_start_string = '\VAR{',
+#    variable_end_string = '}',
+#    comment_start_string = '\#{',
+#    comment_end_string = '}',
+#    line_statement_prefix = '%-',
+#    line_comment_prefix = '%#',
+#    trim_blocks = True,
+#    autoescape = False,
+#    loader = jinja2.FileSystemLoader(os.path.abspath('.'))
+#)
+
+
+#texenv = jinja2.Environment()
+#texenv.block_start_string = '\BLOCK{'
+#texenv.block_end_string = '}'
+#texenv.loader = jinja2.FileSystemLoader('.')
+
 def main(options):
-    template = report_renderer.get_template(options.template)
+    #template = report_renderer.get_template(options.template)
+    template = texenv.get_template(options.template)
 
     cwd = os.getcwd()
 
@@ -56,20 +56,21 @@ def main(options):
         output_name = tpl_base + "_"
     
     output_dir = os.path.dirname(output_name)
+    if output_dir != "":
+        os.chdir(output_dir)
     output_basename = os.path.basename(output_name)
     output_tplname = output_basename.split("/")[-1]
 
-    os.chdir(output_dir)
 
     for subj in range(options.num_subj):
         subj = subj+1
         dest = output_tplname + str(subj) + '.tex'
         with open( dest, 'w') as f:
-                f.write(template.render(random = random, infos = {"subj" : subj}))
-        os.system("pdflatex " + dest)
+            f.write(template.render(plop = str(1), RdExpression = RdExpression , infos = {"subj" : subj}))
+        #os.system("pdflatex " + dest)
 
-        if not options.dirty:
-            os.system("rm *.aux *.log")
+        #if not options.dirty:
+        #    os.system("rm *.aux *.log")
 
     os.chdir(cwd)
 
