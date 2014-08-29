@@ -6,13 +6,6 @@ import sys
 import optparse
 from pymath.random_expression import RdExpression
 
-#texenv = jinja2.Environment(
-#    block_start_string = '%{',
-#    block_end_string = '%}',
-#    variable_start_string = '%{{',
-#    variable_end_string = '%}}',
-#    loader = jinja2.FileSystemLoader(os.path.abspath('.'))
-#)
 texenv = jinja2.Environment(
     block_start_string = '\Block{',
     # Gros WTF!! Si on le met en maj ça ne marche pas alors que c'est en maj dans le template...
@@ -21,27 +14,6 @@ texenv = jinja2.Environment(
     variable_end_string = '}',
     loader = jinja2.FileSystemLoader(os.path.abspath('.'))
 )
-
-# The environment
-#report_renderer = jinja2.Environment(
-#    block_start_string = '\BLOCK{',
-#    block_end_string = '}',
-#    variable_start_string = '\VAR{',
-#    variable_end_string = '}',
-#    comment_start_string = '\#{',
-#    comment_end_string = '}',
-#    line_statement_prefix = '%-',
-#    line_comment_prefix = '%#',
-#    trim_blocks = True,
-#    autoescape = False,
-#    loader = jinja2.FileSystemLoader(os.path.abspath('.'))
-#)
-
-
-#texenv = jinja2.Environment()
-#texenv.block_start_string = '\BLOCK{'
-#texenv.block_end_string = '}'
-#texenv.loader = jinja2.FileSystemLoader('.')
 
 def main(options):
     #template = report_renderer.get_template(options.template)
