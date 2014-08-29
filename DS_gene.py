@@ -4,6 +4,7 @@
 import jinja2, random, os
 import sys
 import optparse
+from path import path
 from pymath.random_expression import RdExpression
 
 texenv = jinja2.Environment(
@@ -19,40 +20,42 @@ def main(options):
     #template = report_renderer.get_template(options.template)
     template = texenv.get_template(options.template)
 
-    cwd = os.getcwd()
+    # Saving place
+    cwd = path("./").abspath()
+
+    template_file =  path(options.template)
 
     if options.output:
-        output_name = options.output
+        output = path(options.output)
     else:
-        tpl_base = os.path.splitext(options.template)[0]
-        output_name = tpl_base + "_"
-    
-    output_dir = os.path.dirname(output_name)
-    if output_dir != "":
-        os.chdir(output_dir)
-    output_basename = os.path.basename(output_name)
-    output_tplname = output_basename.split("/")[-1]
+        # Template should be named tpl_... tpl will replace by the number/name of the version
+        output =  path(template_file.dirname()) / path(template_file.name[3:])
+
+    if output.dirname != "":
+        output.dirname().cd()
+
+    output = output.name
 
 
     for subj in range(options.num_subj):
         subj = subj+1
-        dest = output_tplname + str(subj) + '.tex'
+        dest = path(str(subj) + output)
         with open( dest, 'w') as f:
-            f.write(template.render(plop = str(1), RdExpression = RdExpression , infos = {"subj" : subj}))
+            f.write(template.render( RdExpression = RdExpression , infos = {"subj" : subj}))
         #os.system("pdflatex " + dest)
 
         #if not options.dirty:
         #    os.system("rm *.aux *.log")
 
-    os.chdir(cwd)
+    cwd.cd()
 
 if __name__ == '__main__':
 
 
     parser = optparse.OptionParser()
     parser.add_option("-t","--tempalte",action="store",type="string",dest="template", help="File with template")
-    parser.add_option("-o","--output",action="store",type="string",dest="output",help="Base name for output (without .tex or any extension))")
-    parser.add_option("-n","--number_subjects", action="store",type="int", dest="num_subj", default = 2, help="The number of subjects to make")
+    parser.add_option("-o","--output",action="store",type="string",dest="output",help="Base name for output )")
+    parser.add_option("-n","--number_subjects", action="store",type="int", dest="num_subj", default = 1, help="The number of subjects to make")
     parser.add_option("-d","--dirty", action="store_true", dest="dirty", help="Do not clean after compilation")
 
     (options, args) = parser.parse_args()
