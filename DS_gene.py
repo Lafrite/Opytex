@@ -4,6 +4,7 @@
 import os
 import sys
 import optparse
+import csv
 from path import path
 
 from texenv import texenv
@@ -24,17 +25,23 @@ def main(options):
         # Template should be named tpl_... tpl will replace by the number/name of the version
         output =  path(template_file.dirname()) / path(template_file.name[3:])
 
+    if not options.csv_file:
+        list_infos = [{num: i+1} for i in range(options.num_subj)]
+    else:
+        with open(options.csv_file, 'r', encoding = 'ISO-8859-1') as f:
+            list_infos = list(csv.DictReader(f, delimiter=";"))
+            for (i,a) in enumerate(list_infos):
+                a['num'] = i+1
+
     if output.dirname() != "":
         output.dirname().cd()
 
     output = output.name
 
-
-    for subj in range(options.num_subj):
-        subj = subj+1
-        dest = path(str(subj) + output)
+    for infos in list_infos:
+        dest = path(str(infos['num']) + output)
         with open( dest, 'w') as f:
-            f.write(template.render( RdExpression = RdExpression , infos = {"subj" : subj}))
+            f.write(template.render( RdExpression = RdExpression , infos = infos))
 
         if not options.no_compil:
             os.system("pdflatex " + dest)
@@ -50,9 +57,11 @@ if __name__ == '__main__':
     parser = optparse.OptionParser()
     parser.add_option("-t","--template",action="store",type="string",dest="template", help="File with the template. The name should have the following form tpl_... .")
     parser.add_option("-o","--output",action="store",type="string",dest="output",help="Base name for output )")
+    parser.add_option("-c","--csv", action="store", type="string", dest="csv_file", help="Filename of the csv file where informations are stored")
     parser.add_option("-N","--number_subjects", action="store",type="int", dest="num_subj", default = 1, help="The number of subjects to make")
     parser.add_option("-d","--dirty", action="store_true", dest="dirty", help="Do not clean after compilation")
     parser.add_option("-n","--no-compile", action="store_true", dest="no_compil", help="Do not compile source code")
+
 
     (options, args) = parser.parse_args()
 
