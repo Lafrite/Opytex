@@ -26,7 +26,7 @@ def main(options):
         output =  path(template_file.dirname()) / path(template_file.name[3:])
 
     if not options.csv_file:
-        list_infos = [{num: i+1} for i in range(options.num_subj)]
+        list_infos = [{"num": i+1} for i in range(options.num_subj)]
     else:
         with open(options.csv_file, 'r', encoding = 'ISO-8859-1') as f:
             list_infos = list(csv.DictReader(f, delimiter=";"))
