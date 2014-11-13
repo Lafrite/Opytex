@@ -50,8 +50,13 @@ def main(options):
         if not options.no_compil:
             os.system("pdflatex " + dest)
 
-            if not options.dirty:
-                os.system("rm *.aux *.log")
+    if not options.dirty:
+        os.system("rm *.aux *.log")
+
+    if not options.no_join:
+        os.system("pdfjam *.pdf -o all" + path(output).namebase + ".pdf")
+        for infos in list_infos:
+            os.system("rm " + path(str(infos['num']) + output).namebase + ".pdf") 
 
     cwd.cd()
 
@@ -65,6 +70,7 @@ if __name__ == '__main__':
     parser.add_option("-N","--number_subjects", action="store",type="int", dest="num_subj", default = 1, help="The number of subjects to make")
     parser.add_option("-d","--dirty", action="store_true", dest="dirty", help="Do not clean after compilation")
     parser.add_option("-n","--no-compile", action="store_true", dest="no_compil", help="Do not compile source code")
+    parser.add_option("-j","--no-join", action="store_true", dest="no_join", help="Do not join pdf and clean single pdf")
 
 
     (options, args) = parser.parse_args()
