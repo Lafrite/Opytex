@@ -10,6 +10,9 @@ from path import path
 from texenv import texenv
 from pymath.random_expression import RdExpression
 
+RdExpression.FORM = "raw"
+
+
 def main(options):
     #template = report_renderer.get_template(options.template)
     template = texenv.get_template(options.template)
@@ -39,6 +42,7 @@ def main(options):
     output = output.name
 
     for infos in list_infos:
+        #print("_______" + str(infos))
         dest = path(str(infos['num']) + output)
         with open( dest, 'w') as f:
             f.write(template.render( RdExpression = RdExpression , infos = infos))
