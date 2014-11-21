@@ -10,9 +10,6 @@ from path import path
 from texenv import texenv
 from pymath.random_expression import RdExpression
 
-RdExpression.FORM = "raw"
-
-
 def main(options):
     #template = report_renderer.get_template(options.template)
     template = texenv.get_template(options.template)
@@ -45,7 +42,7 @@ def main(options):
         #print("_______" + str(infos))
         dest = path(str(infos['num']) + output)
         with open( dest, 'w') as f:
-            f.write(template.render( RdExpression = RdExpression , infos = infos))
+            f.write(template.render( RdExpression = RdExpression , infos = infos, type=type))
 
         if not options.no_compil:
             os.system("pdflatex " + dest)

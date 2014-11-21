@@ -9,7 +9,7 @@
 % DS DSCorr DM DMCorr Corr
 \typedoc{DS}
 \duree{1 heure}
-\sujet{\Var{infos.Nom}}
+\sujet{}
 
 
 \begin{document}
@@ -19,18 +19,30 @@
 Le barème est donné à titre indicatif, il pourra être modifié.
 
 \begin{Exo}[4.5]
-    \Block{do RdExpression.set_form("exp")}
-    \Block{set A = RdExpression("{a} / 2 + 2")()}
-    \Block{set B = RdExpression("{a} / 2 + 4")()}
+    
+    
+    
 		Développer et réduire les expressions suivantes:
 		\begin{equation*}
-            A = \Var{ A } \\
-            B = \Var{ B }
+            A = \frac{ ( -8 ) }{ 2 } + 2 \\
+            A = <class 'pymath.expression.Expression'> \\
+            B = \frac{ ( -8 ) }{ 2 } + 4
 		\end{equation*}
 
         Solutions:
-        \Var{A.simplify() | calculus}
-        \Var{B.simplify() | calculus(name = "B")}
+        \begin{eqnarray*}
+A & = & \frac{ ( -8 ) }{ 2 } + 2 \\ 
+A & = & \frac{ -8 }{ 2 } + 2 \\ 
+A & = & ( -4 ) + 2 \\ 
+A & = & -2
+\end{eqnarray*}
+
+        \begin{eqnarray*}
+B & = & \frac{ ( -8 ) }{ 2 } + 4 \\ 
+B & = & \frac{ -8 }{ 2 } + 4 \\ 
+B & = & ( -4 ) + 4 \\ 
+B & = & 0
+\end{eqnarray*}
 
 \end{Exo}
 
