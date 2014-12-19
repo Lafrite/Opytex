@@ -10,7 +10,8 @@ texenv = jinja2.Environment(
     block_end_string = '}',
     variable_start_string = '\Var{',
     variable_end_string = '}',
-    loader = jinja2.FileSystemLoader(os.path.abspath('.'))
+    loader = jinja2.FileSystemLoader(os.path.abspath('.')),
+    extensions=['jinja2.ext.do']
 )
 
 # Filters

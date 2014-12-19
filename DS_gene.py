@@ -10,8 +10,6 @@ from path import path
 from texenv import texenv
 from pymath.random_expression import RdExpression
 
-RdExpression.FORM = "raw"
-
 
 def main(options):
     #template = report_renderer.get_template(options.template)

@@ -1,36 +1,52 @@
-\documentclass[a4paper,10pt]{/media/documents/Cours/Prof/Enseignements/Archive/2013-2014/tools/style/classDS}
-\usepackage{/media/documents/Cours/Prof/Enseignements/Archive/2013-2014/2013_2014}
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
 
 % Title Page
-\titre{Calcul littéral et statistiques}
+\title{Jouons avec DS\_géné et pyMath}
 % \quatreC \quatreD \troisB \troisPro
-\classe{\troisB}
-\date{26 septemble 2013}
-% DS DSCorr DM DMCorr Corr
-\typedoc{DS}
-\duree{1 heure}
-\sujet{\Var{infos.Nom}}
+\date{}
 
 
 \begin{document}
 \maketitle
 
-\Calc
-Le barème est donné à titre indicatif, il pourra être modifié.
-
-\begin{Exo}[4.5]
-    \Block{set A = RdExpression("{a} / 2 + 2")()}
-    \Block{set B = RdExpression("{a} / 2 + 4")()}
+\section{Exercice de simplification de fraction}
+    \Block{do RdExpression.set_form("exp")}
+    \Block{set A = RdExpression("{a}/2+2")()}
+    \Block{set B = RdExpression("{a}/2+2")()}
 		Développer et réduire les expressions suivantes:
+
 		\begin{equation*}
-            A = \Var{ A } \\
+            A = \Var{ A } \qquad
             B = \Var{ B }
 		\end{equation*}
 
         Solutions:
         \Var{A.simplify() | calculus}
         \Var{B.simplify() | calculus(name = "B")}
-\end{Exo}
+
+\section{Mettre sous forme canonique}
+    \Block{set P = RdExpression("{a}x^2 + {b}x + {c}")()}
+    Mettre $\Var{P}$ sous la forme canonique.
+
+    Solution:
+
+    On simplifie le polynôme:
+    \begin{eqnarray*}
+        \Var{P.simplify() | calculus(name = "P(x) = ")}
+    \end{eqnarray*}
+    
+
+    Calcul des coordonnées du sommet de la courbe:
+    \begin{eqnarray*}
+        \alpha & = & \frac{-b}{2a} =  \\
+        \beta & = & -\frac{b^2 - 4ac}{4a} = 
+    \end{eqnarray*}
+    
 
 
 \end{document}
