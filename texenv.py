@@ -25,7 +25,7 @@ def do_calculus(steps, name = "A"):
     """
     ans = "\\begin{eqnarray*}\n"
 
-    ans += " \\\\ \n".join([name + " & = & " + s for s in steps])
+    ans += " \\\\ \n".join([name + " & = & " + str(s) for s in steps])
     ans += "\n\\end{eqnarray*}\n"
     return ans
 
