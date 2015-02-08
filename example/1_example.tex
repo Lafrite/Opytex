@@ -1,106 +1,107 @@
-\documentclass[a4paper,10pt]{/media/documents/Cours/Prof/Enseignements/Archive/2013-2014/tools/style/classDS}
-\usepackage{/media/documents/Cours/Prof/Enseignements/Archive/2013-2014/2013_2014}
+\documentclass[a4paper,10pt]{article}
+\RequirePackage[utf8x]{inputenc}
+\RequirePackage[francais]{babel}
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{subfig}
+\RequirePackage{graphicx}
+\RequirePackage{color}
 
 % Title Page
-\titre{Calcul littéral et statistiques}
-% \quatreC \quatreD \troisB \troisPro
-\classe{\troisB}
-\date{26 septemble 2013}
-% DS DSCorr DM DMCorr Corr
-\typedoc{DS}
-\duree{1 heure}
-\sujet{}
-
+\title{Calcul littéral et statistiques}
+\date{\today}
 
 \begin{document}
 \maketitle
 
-\Calc
-Le barème est donné à titre indicatif, il pourra être modifié.
 
-\begin{Exo}[4.5]
-    
-    
-    
-    
-		Développer et réduire les expressions suivantes:
-            \begin{eqnarray*}
-                A &=& \frac{ 1 }{ 2 } + 2 \\
-                P(x) &=& 6 x - 2 \\
-                Q(x) &=& 4 x + 11\\
-                R(x) &=& ( 6 x - 2 ) \times ( 4 x + 11 ) 
-            \end{eqnarray*}
-
-        Solutions:
-        \begin{eqnarray*}
-A & = & \frac{ 1 }{ 2 } + 2 \\ 
-A & = & \frac{ 1 \times 1 }{ 2 \times 1 } + \frac{ 2 \times 2 }{ 1 \times 2 } \\ 
-A & = & \frac{ 1 + 4 }{ 2 } \\ 
-A & = & \frac{ 5 }{ 2 }
-\end{eqnarray*}
-
-        \begin{eqnarray*}
-P(2) & = & 6 \times 2 - 2 \\ 
-P(2) & = & 12 - 2 \\ 
-P(2) & = & 10
-\end{eqnarray*}
-
-        \begin{eqnarray*}
-Q(2) & = & 4 \times 2 + 11 \\ 
-Q(2) & = & 8 + 11 \\ 
-Q(2) & = & 19
-\end{eqnarray*}
-
-        \begin{eqnarray*}
-P(x) + Q(X) & = & 6 x + 4 x - 2 + 11 \\ 
-P(x) + Q(X) & = & ( 6 + 4 ) x + ( -2 ) + 11 \\ 
-P(x) + Q(X) & = & 10 x + 9
-\end{eqnarray*}
-
-        \begin{eqnarray*}
-P(x) + Q(X) & = & 6 x - 2 + 4 x + 11 \\ 
-P(x) + Q(X) & = & 4 x + 6 x + 11 - 2 \\ 
-P(x) + Q(X) & = & ( 4 + 6 ) x + 11 + ( -2 ) \\ 
-P(x) + Q(X) & = & 10 x + 9
-\end{eqnarray*}
-
-        \begin{eqnarray*}
-R(x) & = & ( 6 x - 2 ) \times ( 4 x + 11 ) \\ 
-R(x) & = & 6 \times 4 x^{  2 } + ( -2 ) \times 4 x + 6 \times 11 x + ( -2 ) \times 11 \\ 
-R(x) & = & 6 \times 4 x^{  2 } + ( ( -2 ) \times 4 + 6 \times 11 ) x + ( -2 ) \times 11 \\ 
-R(x) & = & 24 x^{  2 } + ( ( -8 ) + 66 ) x - 22 \\ 
-R(x) & = & 24 x^{  2 } + 58 x - 22
-\end{eqnarray*}
+\section{Polynômes}
 
 
-\end{Exo}
 
-\begin{Exo}
-    
     Résoudre l'équation suivante
     \begin{eqnarray*}
-        3 x^{  2 } + x + 10 & = & 0
+        - 4 x^{  2 } + 4 x - 1 & = & 0
     \end{eqnarray*}
 
     Solution:
 
     On commence par calculer le discriminant
+    
     \begin{eqnarray*}
-        \Delta & = & b^2-4ac
+        \Delta & = & b^2-4ac \\
+        \Delta & = & 4^{  2 } - 4 \times ( -4 ) \times ( -1 ) \\ 
+\Delta & = & 16 - ( -16 ) \times ( -1 ) \\ 
+\Delta & = & 16 - 16 \\ 
+\Delta & = & 0
     \end{eqnarray*}
     
-    \begin{eqnarray*}
-\Delta & = & 1^{  2 } - 4 \times 3 \times 10 \\ 
-\Delta & = & 1 - 12 \times 10 \\ 
-\Delta & = & 1 - 120 \\ 
-\Delta & = & -119
-\end{eqnarray*}
 
     
-    Alors $\Delta = -119$
+    Alors $\Delta = 0 = 0$ donc il y a une solution
+
+    
+
+    \begin{eqnarray*}
+        x_1 = \frac{-b}{2a} = \frac{ -4 }{ 2 \times ( -4 ) } = \frac{ -4 }{ -8 } = \frac{ 4 }{ 8 } = \frac{ 1 \times 4 }{ 2 \times 4 } = \frac{ 1 }{ 2 } = \frac{ -4 }{ -8 }
+    \end{eqnarray*}
+
+    Les solutions sont donc $\mathcal{S} = \left\{ \frac{ -4 }{ -8 }\right\}$
+
+    
+
+    \bigskip
+    ~\dotfill
+    \bigskip
     
     
-\end{Exo}
+    
+    
+    Résoudre l'équation suivante
+    \begin{eqnarray*}
+        - 10 x^{  2 } - 5 x - 5 & = & x^{  2 } + 5 x - 9
+    \end{eqnarray*}
+
+    Solution:
+
+    On commence par se ramener à une équation de la forme $ax^2+bx+c = 0$.
+
+    \begin{eqnarray*}
+        - 10 x^{  2 } - 5 x - 5 = x^{  2 } + 5 x - 9 & \Leftrightarrow & - 10 x^{  2 } - 5 x - 5 - (x^{  2 } + 5 x - 9) = 0 \\
+         & \Leftrightarrow & - 10 x^{  2 } - x^{  2 } - 5 x - 5 x - 5 + 9= 0 \\ 
+ & \Leftrightarrow & ( ( -10 ) + ( -1 ) ) x^{  2 } + ( ( -5 ) + ( -5 ) ) x + ( -5 ) + 9= 0 \\ 
+ & \Leftrightarrow & - 11 x^{  2 } - 10 x + 4= 0
+    \end{eqnarray*}
+
+    
+    On cherche maintenant à résoudre l'équation $- 11 x^{  2 } - 10 x + 4 = 0$.
+    
+    On commence par calculer le discriminant
+    
+    \begin{eqnarray*}
+        \Delta & = & b^2-4ac \\
+        \Delta & = & ( -10 )^{  2 } - 4 \times ( -11 ) \times 4 \\ 
+\Delta & = & 100 - ( -44 ) \times 4 \\ 
+\Delta & = & 100 - ( -176 ) \\ 
+\Delta & = & 276
+    \end{eqnarray*}
+    
+
+    
+    Alors $\Delta = 276 > 0$ donc il y a deux solutions
+
+    
+    
+
+    \begin{eqnarray*}
+        x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{-10 - \sqrt{276}}{2 \times -11} = 0.3 \\
+        x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{-10 + \sqrt{276}}{2 \times -11} = -1.21
+    \end{eqnarray*}
+
+    Les solutions sont donc $\mathcal{S} = \left\{ 0.3; -1.21 \right\}$
+
+    
 
 
 \end{document}

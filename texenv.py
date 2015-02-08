@@ -16,17 +16,20 @@ texenv = jinja2.Environment(
 
 # Filters
 
-def do_calculus(steps, name = "A"):
+def do_calculus(steps, name = "A", sep = "=", end = "", joining = " \\\\ \n"):
     """Display properly the calculus
+
+    Generate this form string:
+    "name & sep & a_step end joining"
 
     :param steps: list of steps
     :returns: latex string ready to be endbeded
 
     """
-    ans = "\\begin{eqnarray*}\n"
+    #ans = "\\begin{eqnarray*}\n"
 
-    ans += " \\\\ \n".join([name + " & = & " + str(s) for s in steps])
-    ans += "\n\\end{eqnarray*}\n"
+    ans = joining.join([name + " & " + sep + " & " + str(s) + end for s in steps])
+    #ans += "\n\\end{eqnarray*}\n"
     return ans
 
 
