@@ -32,9 +32,11 @@ def do_calculus(steps, name = "A", sep = "=", end = "", joining = " \\\\ \n"):
     #ans += "\n\\end{eqnarray*}\n"
     return ans
 
-
-
 texenv.filters['calculus'] = do_calculus
+
+from random import shuffle
+texenv.filters['shuffle'] = shuffle
+
 
 
 if __name__ == '__main__':

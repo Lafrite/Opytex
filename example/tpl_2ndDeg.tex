@@ -19,7 +19,8 @@
 \section{Polynômes}
 
 
-\Block{set P = Polynom.random(["{a}", "{b}", "{c}"], ["{b}**2 - 4*{a}*{c} == 0"])}
+
+    \Block{set P = Polynom_deg2.random(["{a}", "{b}", "{c}"], ["{b}**2 - 4*{a}*{c} == 0"])}
     Résoudre l'équation suivante
     \begin{eqnarray*}
         \Var{P} & = & 0
@@ -27,40 +28,33 @@
 
     Solution:
 
-    On commence par calculer le discriminant
-    \Block{set Delta = Expression("{b}^2 - 4*{a}*{c}".format(a = P._coef[2], b = P._coef[1], c = P._coef[0]))}
+    On commence par calculer le discriminant de $P(x) = \Var{P}$.
     \begin{eqnarray*}
         \Delta & = & b^2-4ac \\
-        \Var{Delta.simplify()|calculus(name="\\Delta")}
+        \Var{P.delta.explain()|calculus(name="\\Delta")}
     \end{eqnarray*}
-    \Block{set Delta = Delta.simplified()}
 
-    \Block{if Delta > 0}
-    Alors $\Delta = \Var{Delta} > 0$ donc il y a deux solutions
-
-    \Block{set x1 = (-P._coef[1] - sqrt(Delta))/(2*P._coef[2])}
-    \Block{set x2 = (-P._coef[1] + sqrt(Delta))/(2*P._coef[2])}
+    \Block{if P.delta > 0}
+    comme $\Delta = \Var{P.delta} > 0$ donc $P$ a deux racines
 
     \begin{eqnarray*}
-        x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-P._coef[1]} - \sqrt{\Var{Delta}}}{2 \times \Var{P._coef[2]}} = \Var{x1 | round(2)} \\
-        x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-P._coef[1]} + \sqrt{\Var{Delta}}}{2 \times \Var{P._coef[2]}} = \Var{x2 | round(2)}
+        x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-P.b} - \sqrt{\Var{P.delta}}}{2 \times \Var{P.a}} = \Var{P.roots()[0] } \\
+        x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-P.b} + \sqrt{\Var{P.delta}}}{2 \times \Var{P.a}} = \Var{P.roots()[1] }
     \end{eqnarray*}
 
-    Les solutions sont donc $\mathcal{S} = \left\{ \Var{x1|round(2)}; \Var{x2|round(2)} \right\}$
+    Les solutions de l'équation $\Var{P} = 0$ sont donc $\mathcal{S} = \left\{ \Var{min(P.roots())}; \Var{max(P.roots())} \right\}$
 
-    \Block{elif Delta == 0}
-    Alors $\Delta = \Var{Delta} = 0$ donc il y a une solution
-
-    \Block{set x1 = Expression("-{b}/(2*{a})".format(b = P._coef[1], a = P._coef[2]))}
+    \Block{elif P.delta == 0}
+    Comme $\Delta = 0$ donc $P$ a deux racines
 
     \begin{eqnarray*}
-        x_1 = \frac{-b}{2a} = \Var{" = ".join(x1.simplify())}
+        x_1 = \frac{-b}{2a} = \Var{P.roots()[0]} \\
     \end{eqnarray*}
 
-    Les solutions sont donc $\mathcal{S} = \left\{ \Var{x1.simplified()}\right\}$
+    La solution de $\Var{P} = 0$ est donc $\mathcal{S} = \left\{ \Var{P.roots()[0]}\right\}$
 
     \Block{else}
-    Alors $\Delta = \Var{Delta} < 0$ donc il n'y a pas de solution.
+    Alors $\Delta = \Var{P.delta} < 0$ donc $P$ n'a pas de racine donc l'équation $\var{P} = 0$ n'a pas de solution.
 
     \Block{endif}
 
@@ -69,8 +63,8 @@
     \bigskip
     
     
-    \Block{set P = Polynom.random(["{a}", "{b}", "{c}"])}
-    \Block{set Q = Polynom.random(["{a}", "{b}", "{c}"])}
+    \Block{set P = Polynom_deg2.random(["{a}", "{b}", "{c}"])}
+    \Block{set Q = Polynom_deg2.random(["{a}", "{b}", "{c}"])}
     Résoudre l'équation suivante
     \begin{eqnarray*}
         \Var{P} & = & \Var{Q}
@@ -80,51 +74,45 @@
 
     On commence par se ramener à une équation de la forme $ax^2+bx+c = 0$.
 
+    \Block{set R = Polynom_deg2((P-Q)._coef)}
+
     \begin{eqnarray*}
         \Var{P} = \Var{Q} & \Leftrightarrow & \Var{P} - (\Var{Q}) = 0 \\
-        \Var{(P - Q)|calculus(name = "", sep = "\\Leftrightarrow", end = "= 0")}
+        \Var{R.explain() | calculus(name = "", sep = "\\Leftrightarrow", end = "= 0")}
     \end{eqnarray*}
 
-    \Block{set R = (P-Q)[-1]}
     On cherche maintenant à résoudre l'équation $\Var{R} = 0$.
     
-    On commence par calculer le discriminant
-    \Block{set Delta = Expression("{b}^2 - 4*{a}*{c}".format(a = R._coef[2], b = R._coef[1], c = R._coef[0]))}
+    On commence par calculer le discriminant de $R(x) = \Var{R}$.
     \begin{eqnarray*}
         \Delta & = & b^2-4ac \\
-        \Var{Delta.simplify()|calculus(name="\\Delta")}
+        \Var{R.delta.explain()|calculus(name="\\Delta")}
     \end{eqnarray*}
-    \Block{set Delta = Delta.simplified()}
+    \Block{set Delta = R.delta}
 
-    \Block{if Delta > 0}
-    Alors $\Delta = \Var{Delta} > 0$ donc il y a deux solutions
-
-    \Block{set x1 = (-R._coef[1] - sqrt(Delta))/(2*R._coef[2])}
-    \Block{set x2 = (-R._coef[1] + sqrt(Delta))/(2*R._coef[2])}
+    \Block{if R.delta > 0}
+    comme $\Delta = \Var{R.delta} > 0$ donc $R$ a deux racines
 
     \begin{eqnarray*}
-        x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-R._coef[1]} - \sqrt{\Var{Delta}}}{2 \times \Var{R._coef[2]}} = \Var{x1 | round(2)} \\
-        x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-R._coef[1]} + \sqrt{\Var{Delta}}}{2 \times \Var{R._coef[2]}} = \Var{x2 | round(2)}
+        x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-R.b} - \sqrt{\Var{Delta}}}{2 \times \Var{R.a}} = \Var{R.roots()[0] } \\
+        x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-R.b} + \sqrt{\Var{Delta}}}{2 \times \Var{R.a}} = \Var{R.roots()[1] }
     \end{eqnarray*}
 
-    Les solutions sont donc $\mathcal{S} = \left\{ \Var{x1|round(2)}; \Var{x2|round(2)} \right\}$
+    Les solutions de l'équation $\Var{R} = 0$ sont donc $\mathcal{S} = \left\{ \Var{min(R.roots())}; \Var{max(R.roots())} \right\}$
 
-    \Block{elif Delta == 0}
-    Alors $\Delta = \Var{Delta} = 0$ donc il y a une solution
-
-    \Block{set x1 = Expression("-{b}/(2*{a})".format(b = R._coef[1], a = R._coef[2]))}
+    \Block{elif R.delta == 0}
+    Comme $\Delta = 0$ donc $R$ a deux racines
 
     \begin{eqnarray*}
-        x_1 = \frac{-b}{2a} = \Var{" = ".join(x1.simplify())}
+        x_1 = \frac{-b}{2a} = \Var{R.roots()[0]} \\
     \end{eqnarray*}
 
-    Les solutions sont donc $\mathcal{S} = \left\{ \Var{x1.simplified()}\right\}$
+    La solution de $\Var{R} = 0$ est donc $\mathcal{S} = \left\{ \Var{R.roots()[0]}\right\}$
 
     \Block{else}
-    Alors $\Delta = \Var{Delta} < 0$ donc il n'y a pas de solution.
+    Alors $\Delta = \Var{R.delta} < 0$ donc $R$ n'a pas de racine donc l'équation $\Var{R} = 0$ n'a pas de solution.
 
     \Block{endif}
-
 
 \end{document}
 
