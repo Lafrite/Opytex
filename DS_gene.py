@@ -8,8 +8,14 @@ import csv
 from path import path
 
 from texenv import texenv
-from pymath.random_expression import RdExpression
+from pymath.expression import Expression
+from pymath.polynom import Polynom
+from pymath.fraction import Fraction 
 
+pymath_tools = {"Expression":Expression,\
+        "Polynom":Polynom,\
+        "Fraction":Fraction,\
+        }
 
 def main(options):
     #template = report_renderer.get_template(options.template)
@@ -39,11 +45,14 @@ def main(options):
 
     output = output.name
 
+    tmp_pdf = []
+
     for infos in list_infos:
         #print("_______" + str(infos))
         dest = path(str(infos['num']) + output)
+        tmp_pdf.append(dest.namebase + ".pdf")
         with open( dest, 'w') as f:
-            f.write(template.render( RdExpression = RdExpression , infos = infos))
+            f.write(template.render(  infos = infos, **pymath_tools ))
 
         if not options.no_compil:
             os.system("pdflatex " + dest)
@@ -52,9 +61,12 @@ def main(options):
         os.system("rm *.aux *.log")
 
     if not options.no_join:
-        os.system("pdfjam *.pdf -o all" + path(output).namebase + ".pdf")
-        for infos in list_infos:
-            os.system("rm " + path(str(infos['num']) + output).namebase + ".pdf") 
+        print(path("./").abspath())
+        print("pdfjam "+ " ".join(tmp_pdf) + " -o all" + path(output).namebase + ".pdf")
+        os.system("pdfjam "+ " ".join(tmp_pdf) + " -o all" + path(output).namebase + ".pdf")
+        #os.system("pdfjam *.pdf -o all" + path(output).namebase + ".pdf")
+        print("rm " + " ".join(tmp_pdf))
+        os.system("rm " + " ".join(tmp_pdf))
 
     cwd.cd()
 
