@@ -25,11 +25,10 @@ def do_calculus(steps, name = "A", sep = "=", end = "", joining = " \\\\ \n"):
     :param steps: list of steps
     :returns: latex string ready to be endbeded
 
+
     """
-    #ans = "\\begin{eqnarray*}\n"
 
     ans = joining.join([name + " & " + sep + " & " + str(s) + end for s in steps])
-    #ans += "\n\\end{eqnarray*}\n"
     return ans
 
 texenv.filters['calculus'] = do_calculus
