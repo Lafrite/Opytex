@@ -1,0 +1,33 @@
+\Block{macro solveEquation(P)}
+
+    On commence par calculer le discriminant de $P(x) = \Var{P}$.
+    \begin{eqnarray*}
+        \Delta & = & b^2-4ac \\
+        \Var{P.delta.explain()|calculus(name="\\Delta")}
+    \end{eqnarray*}
+
+    \Block{if P.delta > 0}
+    comme $\Delta = \Var{P.delta} > 0$ donc $P$ a deux racines
+
+    \begin{eqnarray*}
+        x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-P.b} - \sqrt{\Var{P.delta}}}{2 \times \Var{P.a}} = \Var{P.roots()[0] } \\
+        x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-P.b} + \sqrt{\Var{P.delta}}}{2 \times \Var{P.a}} = \Var{P.roots()[1] }
+    \end{eqnarray*}
+
+    Les solutions de l'équation $\Var{P} = 0$ sont donc $\mathcal{S} = \left\{ \Var{P.roots()[0]}; \Var{P.roots()[1]} \right\}$
+
+    \Block{elif P.delta == 0}
+    Comme $\Delta = 0$ donc $P$ a une racine
+
+    \begin{eqnarray*}
+        x_1 = \frac{-b}{2a} = \frac{-\Var{P.b}}{2\times \Var{P.a}} = \Var{P.roots()[0]} \\
+    \end{eqnarray*}
+
+    La solution de $\Var{P} = 0$ est donc $\mathcal{S} = \left\{ \Var{P.roots()[0]}\right\}$
+
+    \Block{else}
+    Alors $\Delta = \Var{P.delta} < 0$ donc $P$ n'a pas de racine donc l'équation $\Var{P} = 0$ n'a pas de solution.
+
+    \Block{endif}
+
+\Block{endmacro}
