@@ -8,14 +8,23 @@ import csv
 from path import path
 
 from texenv import texenv
+
+import math as m
+import random as rd
 from pymath.expression import Expression
 from pymath.polynom import Polynom
+from pymath.polynomDeg2 import Polynom_deg2
 from pymath.fraction import Fraction 
 
-pymath_tools = {"Expression":Expression,\
+export_dict = {}
+export_dict.update(m.__dict__)
+export_dict.update(rd.__dict__)
+export_dict.update(__builtins__.__dict__)
+export_dict.update({"Expression":Expression,\
         "Polynom":Polynom,\
+        "Polynom_deg2":Polynom_deg2,\
         "Fraction":Fraction,\
-        }
+        })
 
 def main(options):
     #template = report_renderer.get_template(options.template)
@@ -52,7 +61,7 @@ def main(options):
         dest = path(str(infos['num']) + output)
         tmp_pdf.append(dest.namebase + ".pdf")
         with open( dest, 'w') as f:
-            f.write(template.render(  infos = infos, **pymath_tools ))
+            f.write(template.render(  infos = infos, **export_dict ))
 
         if not options.no_compil:
             os.system("pdflatex " + dest)

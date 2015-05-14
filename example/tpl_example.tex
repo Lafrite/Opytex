@@ -1,4 +1,5 @@
 \documentclass[a4paper,10pt]{article}
+<<<<<<< HEAD
 \usepackage[utf8x]{inputenc}
 \usepackage[francais]{babel}
 \usepackage{amssymb}
@@ -10,10 +11,25 @@
 % \quatreC \quatreD \troisB \troisPro
 \date{}
 
+=======
+\RequirePackage[utf8x]{inputenc}
+\RequirePackage[francais]{babel}
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{subfig}
+\RequirePackage{graphicx}
+\RequirePackage{color}
+
+% Title Page
+\title{Calcul littéral et statistiques}
+\date{\today}
+>>>>>>> origin/dev
 
 \begin{document}
 \maketitle
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 \section{Exercice de simplification de fraction}
     \Block{do RdExpression.set_form("exp")}
@@ -77,6 +93,13 @@ Le barème est donné à titre indicatif, il pourra être modifié.
 
 \begin{Exo}
     \Block{set P = Polynom.random(["{a}", "{b}", "{c}"])}
+=======
+
+\section{Polynômes}
+
+
+\Block{set P = Polynom.random(["{a}", "{b}", "{c}"], ["{b}**2 - 4*{a}*{c} == 0"])}
+>>>>>>> origin/dev
     Résoudre l'équation suivante
     \begin{eqnarray*}
         \Var{P} & = & 0
@@ -85,16 +108,106 @@ Le barème est donné à titre indicatif, il pourra être modifié.
     Solution:
 
     On commence par calculer le discriminant
-    \begin{eqnarray*}
-        \Delta & = & b^2-4ac
-    \end{eqnarray*}
     \Block{set Delta = Expression("{b}^2 - 4*{a}*{c}".format(a = P._coef[2], b = P._coef[1], c = P._coef[0]))}
-    \Var{Delta.simplify()|calculus(name="\\Delta")}
+    \begin{eqnarray*}
+        \Delta & = & b^2-4ac \\
+        \Var{Delta.simplify()|calculus(name="\\Delta")}
+    \end{eqnarray*}
     \Block{set Delta = Delta.simplified()}
-    Alors $\Delta = \Var{Delta}$
+
+    \Block{if Delta > 0}
+    Alors $\Delta = \Var{Delta} > 0$ donc il y a deux solutions
+
+    \Block{set x1 = (-P._coef[1] - sqrt(Delta))/(2*P._coef[2])}
+    \Block{set x2 = (-P._coef[1] + sqrt(Delta))/(2*P._coef[2])}
+
+    \begin{eqnarray*}
+        x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-P._coef[1]} - \sqrt{\Var{Delta}}}{2 \times \Var{P._coef[2]}} = \Var{x1 | round(2)} \\
+        x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-P._coef[1]} + \sqrt{\Var{Delta}}}{2 \times \Var{P._coef[2]}} = \Var{x2 | round(2)}
+    \end{eqnarray*}
+
+    Les solutions sont donc $\mathcal{S} = \left\{ \Var{x1|round(2)}; \Var{x2|round(2)} \right\}$
+
+    \Block{elif Delta == 0}
+    Alors $\Delta = \Var{Delta} = 0$ donc il y a une solution
+
+    \Block{set x1 = Expression("-{b}/(2*{a})".format(b = P._coef[1], a = P._coef[2]))}
+
+    \begin{eqnarray*}
+        x_1 = \frac{-b}{2a} = \Var{" = ".join(x1.simplify())}
+    \end{eqnarray*}
+
+    Les solutions sont donc $\mathcal{S} = \left\{ \Var{x1.simplified()}\right\}$
+
+    \Block{else}
+    Alors $\Delta = \Var{Delta} < 0$ donc il n'y a pas de solution.
+
+    \Block{endif}
+
+    \bigskip
+    ~\dotfill
+    \bigskip
     
     
+    \Block{set P = Polynom.random(["{a}", "{b}", "{c}"])}
+    \Block{set Q = Polynom.random(["{a}", "{b}", "{c}"])}
+    Résoudre l'équation suivante
+    \begin{eqnarray*}
+        \Var{P} & = & \Var{Q}
+    \end{eqnarray*}
+
+    Solution:
+
+    On commence par se ramener à une équation de la forme $ax^2+bx+c = 0$.
+
+    \begin{eqnarray*}
+        \Var{P} = \Var{Q} & \Leftrightarrow & \Var{P} - (\Var{Q}) = 0 \\
+        \Var{(P - Q)|calculus(name = "", sep = "\\Leftrightarrow", end = "= 0")}
+    \end{eqnarray*}
+
+    \Block{set R = (P-Q)[-1]}
+    On cherche maintenant à résoudre l'équation $\Var{R} = 0$.
+    
+<<<<<<< HEAD
 \end{Exo}
+>>>>>>> origin/dev
+=======
+    On commence par calculer le discriminant
+    \Block{set Delta = Expression("{b}^2 - 4*{a}*{c}".format(a = R._coef[2], b = R._coef[1], c = R._coef[0]))}
+    \begin{eqnarray*}
+        \Delta & = & b^2-4ac \\
+        \Var{Delta.simplify()|calculus(name="\\Delta")}
+    \end{eqnarray*}
+    \Block{set Delta = Delta.simplified()}
+
+    \Block{if Delta > 0}
+    Alors $\Delta = \Var{Delta} > 0$ donc il y a deux solutions
+
+    \Block{set x1 = (-R._coef[1] - sqrt(Delta))/(2*R._coef[2])}
+    \Block{set x2 = (-R._coef[1] + sqrt(Delta))/(2*R._coef[2])}
+
+    \begin{eqnarray*}
+        x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-R._coef[1]} - \sqrt{\Var{Delta}}}{2 \times \Var{R._coef[2]}} = \Var{x1 | round(2)} \\
+        x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-R._coef[1]} + \sqrt{\Var{Delta}}}{2 \times \Var{R._coef[2]}} = \Var{x2 | round(2)}
+    \end{eqnarray*}
+
+    Les solutions sont donc $\mathcal{S} = \left\{ \Var{x1|round(2)}; \Var{x2|round(2)} \right\}$
+
+    \Block{elif Delta == 0}
+    Alors $\Delta = \Var{Delta} = 0$ donc il y a une solution
+
+    \Block{set x1 = Expression("-{b}/(2*{a})".format(b = R._coef[1], a = R._coef[2]))}
+
+    \begin{eqnarray*}
+        x_1 = \frac{-b}{2a} = \Var{" = ".join(x1.simplify())}
+    \end{eqnarray*}
+
+    Les solutions sont donc $\mathcal{S} = \left\{ \Var{x1.simplified()}\right\}$
+
+    \Block{else}
+    Alors $\Delta = \Var{Delta} < 0$ donc il n'y a pas de solution.
+
+    \Block{endif}
 >>>>>>> origin/dev
 
 
