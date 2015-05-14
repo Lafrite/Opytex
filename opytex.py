@@ -15,6 +15,8 @@ from pymath.expression import Expression
 from pymath.polynom import Polynom
 from pymath.polynomDeg2 import Polynom_deg2
 from pymath.fraction import Fraction 
+from pymath.random_expression import random_str 
+
 
 export_dict = {}
 export_dict.update(m.__dict__)
@@ -24,6 +26,7 @@ export_dict.update({"Expression":Expression,\
         "Polynom":Polynom,\
         "Polynom_deg2":Polynom_deg2,\
         "Fraction":Fraction,\
+        "random_str": random_str,\
         })
 
 def main(options):

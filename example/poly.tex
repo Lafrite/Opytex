@@ -1,0 +1,23 @@
+
+\Block{set A = Expression.random("{a} / 2 + 2")}
+\Block{set P = Polynom.random(["{b}","{a}"])}
+\Block{set Q = Polynom.random(["{b+2}","{a}"])}
+\Block{set R = P('x')*Q('x') }
+
+\Block{set exps = [A, P, Q, R]}
+\Block{set names = ["A", "B", "C", "D"]}
+
+    Développer et réduire les expressions suivantes:
+        \begin{eqnarray*}
+            \Block{for i in range(4)}
+            \Var{ names[i]} &=& \Var{exps[i]} \\
+            \Block{endfor}
+        \end{eqnarray*}
+
+    Solutions:
+    \Var{A.simplify() | calculus}
+    \Var{P(2).simplify() | calculus(name = "P(2)")}
+    \Var{Q(2).simplify() | calculus(name = "Q(2)")}
+    \Var{(P+Q) | calculus(name = "P(x) + Q(X)")}
+    \Var{(P('x')+Q('x')).simplify() | calculus(name = "P(x) + Q(X)")}
+    \Var{R.simplify() | calculus(name = "R(x)")}

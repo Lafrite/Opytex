@@ -1,0 +1,117 @@
+\documentclass[a4paper,10pt]{article}
+\RequirePackage[utf8x]{inputenc}
+\RequirePackage[francais]{babel}
+\RequirePackage{amssymb}
+\RequirePackage{amsmath}
+\RequirePackage{amsfonts}
+\RequirePackage{subfig}
+\RequirePackage{graphicx}
+\RequirePackage{color}
+
+
+
+% Title Page
+\title{Calcul littéral et statistiques}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+
+\section{Polynômes}
+
+
+
+    
+    Résoudre l'équation suivante
+    \begin{eqnarray*}
+        3 x^{  2 } + 6 x + 3 & = & 0
+    \end{eqnarray*}
+
+    Solution:
+
+    
+
+    On commence par calculer le discriminant de $P(x) = 3 x^{  2 } + 6 x + 3$.
+    \begin{eqnarray*}
+        \Delta & = & b^2-4ac \\
+        \Delta & = & 6^{  2 } - 4 \times 3 \times 3 \\ 
+\Delta & = & 36 - 4 \times 9 \\ 
+\Delta & = & 36 - 36 \\ 
+\Delta & = & 0
+    \end{eqnarray*}
+
+    
+    Comme $\Delta = 0$ donc $P$ a une racine
+
+    \begin{eqnarray*}
+        x_1 = \frac{-b}{2a} = \frac{-6}{2\times 3} = -1 \\
+    \end{eqnarray*}
+
+    La solution de $3 x^{  2 } + 6 x + 3 = 0$ est donc $\mathcal{S} = \left\{ -1\right\}$
+
+    
+
+
+
+    \bigskip
+    ~\dotfill
+    \bigskip
+    
+    
+    
+    
+    Résoudre l'équation suivante
+    \begin{eqnarray*}
+        x^{  2 } + 4 x + 2 & = & - 9 x^{  2 } + 9 x + 5
+    \end{eqnarray*}
+
+    Solution:
+
+    On commence par se ramener à une équation de la forme $ax^2+bx+c = 0$.
+
+    
+
+    \begin{align*}
+         & & x^{  2 } + 4 x + 2 = - 9 x^{  2 } + 9 x + 5 \\
+         & \Leftrightarrow & x^{  2 } + 4 x + 2 - ( - 9 x^{  2 } + 9 x + 5 )= 0 \\ 
+ & \Leftrightarrow & x^{  2 } + 4 x + 2 + 9 x^{  2 } - 9 x - 5= 0 \\ 
+ & \Leftrightarrow & ( 1 + 9 ) x^{  2 } + ( 4 - 9 ) x + 2 - 5= 0 \\ 
+ & \Leftrightarrow & 10 x^{  2 } - 5 x - 3= 0
+    \end{align*}
+
+    On cherche maintenant à résoudre l'équation $10 x^{  2 } - 5 x - 3 = 0$.
+    
+    
+
+    On commence par calculer le discriminant de $P(x) = 10 x^{  2 } - 5 x - 3$.
+    \begin{eqnarray*}
+        \Delta & = & b^2-4ac \\
+        \Delta & = & -5^{  2 } - 4 \times 10 \times ( -3 ) \\ 
+\Delta & = & 25 - 4 \times ( -30 ) \\ 
+\Delta & = & 25 - ( -120 ) \\ 
+\Delta & = & 145
+    \end{eqnarray*}
+
+    
+    comme $\Delta = 145 > 0$ donc $P$ a deux racines
+
+    \begin{eqnarray*}
+        x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{-5 - \sqrt{145}}{2 \times 10} = - \frac{\sqrt{145}}{20} + \frac{1}{4} \\
+        x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{-5 + \sqrt{145}}{2 \times 10} = \frac{1}{4} + \frac{\sqrt{145}}{20}
+    \end{eqnarray*}
+
+    Les solutions de l'équation $10 x^{  2 } - 5 x - 3 = 0$ sont donc $\mathcal{S} = \left\{ - \frac{\sqrt{145}}{20} + \frac{1}{4}; \frac{1}{4} + \frac{\sqrt{145}}{20} \right\}$
+
+    
+
+
+
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End:
+
+    

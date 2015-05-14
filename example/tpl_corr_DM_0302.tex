@@ -1,0 +1,359 @@
+\documentclass[a4paper,10pt, table]{/media/documents/Cours/Prof/Enseignements/tools/style/classDS}
+\usepackage{/media/documents/Cours/Prof/Enseignements/2014_2015}
+
+% Title Page
+\titre{DM5}
+% \seconde \premiereS \PSTMG \TSTMG
+\classe{\premiereS}
+\date{02 mars 2015}
+%\duree{1 heure}
+\sujet{\Var{infos.num}}
+% DS DSCorr DM DMCorr Corr
+\typedoc{DM}
+
+\printanswers
+
+\begin{document}
+
+\maketitle
+
+Le barème est donné à titre indicatif, il pourra être modifié. Vous rendrez le sujet avec la copie.
+
+\begin{questions}
+
+    \question
+    Résoudre les équations suivantes
+    \Block{set P = Polynom_deg2.random(["{a}", "{b}", "{c}"], name = 'P')}
+    \Block{set Q = Polynom_deg2.random(["{a}", "{b}", "{c}"], name = 'Q')}
+    \begin{eqnarray*}
+        \Var{P} & > &0 \\
+    \end{eqnarray*}
+
+    \begin{solution}
+        On commence par calculer le discriminant de $\Var{P.name}(x) = \Var{P}$.
+        \begin{eqnarray*}
+            \Delta & = & b^2-4ac \\
+            \Var{P.delta.explain()|calculus(name="\\Delta")}
+        \end{eqnarray*}
+
+        \Block{if P.delta > 0}
+        comme $\Delta = \Var{P.delta} > 0$ donc $\Var{P.name}$ a deux racines
+
+            \begin{eqnarray*}
+                x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-P.b} - \sqrt{\Var{P.delta}}}{2 \times \Var{P.a}} = \Var{P.roots()[0] } \\
+                x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-P.b} + \sqrt{\Var{P.delta}}}{2 \times \Var{P.a}} = \Var{P.roots()[1] }
+            \end{eqnarray*}
+
+
+        \Block{elif P.delta == 0}
+        Comme $\Delta = 0$ donc $\Var{P.name}$ a deux racines
+
+            \begin{eqnarray*}
+                x_1 = \frac{-b}{2a} = \Var{P.roots()[0]} \\
+            \end{eqnarray*}
+
+
+        \Block{else}
+        Alors $\Delta = \Var{P.delta} < 0$ donc $\Var{P.name}$ n'a pas de racine.
+
+        \Block{endif}
+        Comme $a = \Var{P.a}$, on en déduit le tableau de signe de $\Var{P.name}$
+            \begin{center}
+                \begin{tikzpicture}
+                    \tkzTabInit[espcl=2]%
+                    {$x$/1, $P$/2}%
+                    \Var{P.tbl_sgn_header()}
+                    \Var{P.tbl_sgn()}
+                \end{tikzpicture}
+            \end{center}
+        On regarde maintenant où sont les $+$ dans le tableau de signe pour résoudre l'inéquation.
+        \end{solution}
+
+        \begin{eqnarray*}
+            \Var{Q} & \leq &0  \\
+        \end{eqnarray*}
+    \begin{solution}
+        On commence par calculer le discriminant de $Q(x) = \Var{Q}$.
+        \begin{eqnarray*}
+            \Delta & = & b^2-4ac \\
+            \Var{Q.delta.explain()|calculus(name="\\Delta")}
+        \end{eqnarray*}
+
+        \Block{if Q.delta > 0}
+            comme $\Delta = \Var{Q.delta} > 0$ donc $Q$ a deux racines
+
+            \begin{eqnarray*}
+                x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-Q.b} - \sqrt{\Var{Q.delta}}}{2 \times \Var{Q.a}} = \Var{Q.roots()[0] } \\
+                x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-Q.b} + \sqrt{\Var{Q.delta}}}{2 \times \Var{Q.a}} = \Var{Q.roots()[1] }
+            \end{eqnarray*}
+
+
+        \Block{elif Q.delta == 0}
+            Comme $\Delta = 0$ donc $Q$ a une racine
+
+            \begin{eqnarray*}
+                x_1 = \frac{-b}{2a} = \Var{Q.roots()[0]} \\
+            \end{eqnarray*}
+
+        \Block{else}
+            Alors $\Delta = \Var{Q.delta} < 0$ donc $Q$ n'a pas de racine.
+
+        \Block{endif}
+        Comme $a = \Var{Q.a}$, on en déduit le tableau de signe de $Q$
+            \begin{center}
+                \begin{tikzpicture}
+                    \tkzTabInit[espcl=2]%
+                    {$x$/1, $Q$/2}%
+                    \Var{Q.tbl_sgn_header()}
+                    \Var{Q.tbl_sgn()}
+                \end{tikzpicture}
+            \end{center}
+        On regarde maintenant où sont les $-$ dans le tableau de signe pour résoudre l'inéquation.
+        \end{solution}
+
+        \begin{eqnarray*}
+            \Var{P} & \geq & \Var{Q} 
+        \end{eqnarray*}
+
+        \Block{set R = P-Q}
+
+        \begin{solution}
+            On commence par se ramener à une équation de la forme $ax^2 + bx + c \geq 0$.
+        \begin{eqnarray*}
+            \Var{P} \geq \Var{Q} & \Leftrightarrow & \Var{P} - (\Var{Q}) \geq 0 \\
+            \Var{R.explain() | calculus(name = "", sep = "\\Leftrightarrow", end = "\\geq 0")}
+        \end{eqnarray*}
+
+        \Block{set R = Polynom_deg2(R._coef)}
+
+        Ensuite on étudie le signe de $R(X) = \Var{R}$.
+        \begin{eqnarray*}
+            \Delta & = & b^2-4ac \\
+            \Var{R.delta.explain()|calculus(name="\\Delta")}
+        \end{eqnarray*}
+
+        \Block{if R.delta > 0}
+            comme $\Delta = \Var{R.delta} > 0$ donc $R$ a deux racines
+
+            \begin{eqnarray*}
+                x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-R.b} - \sqrt{\Var{R.delta}}}{2 \times \Var{R.a}} = \Var{R.roots()[0] } \\
+                x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-R.b} + \sqrt{\Var{R.delta}}}{2 \times \Var{R.a}} = \Var{R.roots()[1] }
+            \end{eqnarray*}
+
+
+        \Block{elif R.delta == 0}
+            Comme $\Delta = 0$ donc $R$ a une racine
+
+            \begin{eqnarray*}
+                x_1 = \frac{-b}{2a} = \Var{R.roots()[0]} \\
+            \end{eqnarray*}
+
+
+        \Block{else}
+            Alors $\Delta = \Var{R.delta} < 0$ donc $R$ n'a pas de racine.
+
+        \Block{endif}
+        Comme $a = \Var{R.a}$, on en déduit le tableau de signe de $R$
+            \begin{center}
+                \begin{tikzpicture}
+                    \tkzTabInit[espcl=2]%
+                    {$x$/1, $R$/2}%
+                    \Var{R.tbl_sgn_header()}
+                    \Var{R.tbl_sgn()}
+                \end{tikzpicture}
+            \end{center}
+        On regarde maintenant où sont les $+$ dans le tableau de signe pour résoudre l'inéquation.
+            
+
+        \end{solution}
+
+
+    \question
+    Tracer le tableau de variation des fonctions suivantes \textit{(Vous pouvez utiliser les nombres à virgules)}
+    \Block{set f = Polynom.random(["{a}", "{b}", "{c}", "{d}"], name = 'f')}
+    \Block{set P = f}
+    \begin{parts}
+        \part $f:x\mapsto \Var{P}$
+        \begin{solution}
+            Pour avoir les variations de $\Var{P.name}$, il faut connaître le signe de sa dérivé. On dérive $P$
+            \Block{set P1 = P.derivate()}
+            \begin{eqnarray*}
+                \Var{P1.explain() | calculus(name = P1.name + "(x)", sep = "=", end = "")}
+            \end{eqnarray*}
+            \Block{set P1 = Polynom_deg2(P1._coef, name = P1.name)}
+            On étudie le signe de $P'$
+            
+            Ensuite on étudie le signe de $\Var{P1.name}(x) = \Var{P1}$.
+        \begin{eqnarray*}
+            \Delta & = & b^2-4ac \\
+            \Var{P1.delta.explain()|calculus(name="\\Delta")}
+        \end{eqnarray*}
+
+        \Block{if P1.delta > 0}
+            comme $\Delta = \Var{P1.delta} > 0$ donc $\Var{P1.name}$ a deux racines
+
+            \begin{eqnarray*}
+                x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-P1.b} - \sqrt{\Var{P1.delta}}}{2 \times \Var{P1.a}} = \Var{P1.roots()[0] } \\
+                x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-P1.b} + \sqrt{\Var{P1.delta}}}{2 \times \Var{P1.a}} = \Var{P1.roots()[1] }
+            \end{eqnarray*}
+
+
+        \Block{elif P1.delta == 0}
+            Comme $\Delta = 0$ donc $\Var{P1.name}$ a une racine
+
+            \begin{eqnarray*}
+                x_1 = \frac{-b}{2a} = \Var{P1.roots()[0]} \\
+            \end{eqnarray*}
+
+
+        \Block{else}
+        Alors $\Delta = \Var{P1.delta} < 0$ donc $\Var{P1.name}$ n'a pas de racine.
+
+        \Block{endif}
+        Comme $a = \Var{P1.a}$, on en déduit le tableau de signe de $\Var{P1.name}$
+            \begin{center}
+                \begin{tikzpicture}
+                    \tkzTabInit[espcl=2]%
+                    {$x$/1, Signe de $\Var{P1.name} $/2}%
+                    \Var{P1.tbl_sgn_header()}
+                    \Var{P1.tbl_sgn()}
+                \end{tikzpicture}
+            \end{center}
+
+        \end{solution}
+
+        \Block{set g = Polynom.random(["{a}", "{b}", "{c}", "{d}"], name = 'g')}
+        \Block{set P = g}
+        \part $g:x\mapsto \Var{P}$
+
+        \begin{solution}
+            Pour avoir les variations de $\Var{P.name}$, il faut connaître le signe de sa dérivé. On dérive $P$
+            \Block{set P1 = P.derivate()}
+            \begin{eqnarray*}
+                \Var{P1.explain() | calculus(name = P1.name + "(x)", sep = "=", end = "")}
+            \end{eqnarray*}
+            \Block{set P1 = Polynom_deg2(P1._coef, name = P1.name)}
+            On étudie le signe de $P'$
+            
+            Ensuite on étudie le signe de $\Var{P1.name}(x) = \Var{P1}$.
+        \begin{eqnarray*}
+            \Delta & = & b^2-4ac \\
+            \Var{P1.delta.explain()|calculus(name="\\Delta")}
+        \end{eqnarray*}
+
+        \Block{if P1.delta > 0}
+            comme $\Delta = \Var{P1.delta} > 0$ donc $\Var{P1.name}$ a deux racines
+
+            \begin{eqnarray*}
+                x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-P1.b} - \sqrt{\Var{P1.delta}}}{2 \times \Var{P1.a}} = \Var{P1.roots()[0] } \\
+                x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-P1.b} + \sqrt{\Var{P1.delta}}}{2 \times \Var{P1.a}} = \Var{P1.roots()[1] }
+            \end{eqnarray*}
+
+
+        \Block{elif P1.delta == 0}
+            Comme $\Delta = 0$ donc $\Var{P1.name}$ a une racine
+
+            \begin{eqnarray*}
+                x_1 = \frac{-b}{2a} = \Var{P1.roots()[0]} \\
+            \end{eqnarray*}
+
+
+        \Block{else}
+        Alors $\Delta = \Var{P1.delta} < 0$ donc $\Var{P1.name}$ n'a pas de racine.
+
+        \Block{endif}
+        Comme $a = \Var{P1.a}$, on en déduit le tableau de signe de $\Var{P1.name}$
+            \begin{center}
+                \begin{tikzpicture}
+                    \tkzTabInit[espcl=2]%
+                    {$x$/1, Signe de $\Var{P1.name} $/2}%
+                    \Var{P1.tbl_sgn_header()}
+                    \Var{P1.tbl_sgn()}
+                \end{tikzpicture}
+            \end{center}
+
+        \end{solution}
+
+        \Block{set R = Polynom.random(["{a}", "{b}", "{c}"])}
+        \part $h:x\mapsto \Var{R} - f(x)$
+
+        \Block{set h = R - f}
+        \Block{do h.give_name('h')}
+
+        \begin{solution}
+            On commence par simplifier l'expression de $h$
+            \begin{eqnarray*}
+                h(x) & = & \Var{R} - f(x) \\
+                \Var{h.explain() | calculus(name = h.name + "(x)", sep = "=", end = "")}
+            \end{eqnarray*}
+            
+        \Block{set P = h}
+            Pour avoir les variations de $\Var{P.name}$, il faut connaître le signe de sa dérivé. On dérive $P$
+            \Block{set P1 = P.derivate()}
+            \begin{eqnarray*}
+                \Var{P1.explain() | calculus(name = P1.name + "(x)", sep = "=", end = "")}
+            \end{eqnarray*}
+            \Block{set P1 = Polynom_deg2(P1._coef, name = P1.name)}
+            On étudie le signe de $P'$
+            
+            Ensuite on étudie le signe de $\Var{P1.name}(x) = \Var{P1}$.
+        \begin{eqnarray*}
+            \Delta & = & b^2-4ac \\
+            \Var{P1.delta.explain()|calculus(name="\\Delta")}
+        \end{eqnarray*}
+
+        \Block{if P1.delta > 0}
+            comme $\Delta = \Var{P1.delta} > 0$ donc $\Var{P1.name}$ a deux racines
+
+            \begin{eqnarray*}
+                x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-P1.b} - \sqrt{\Var{P1.delta}}}{2 \times \Var{P1.a}} = \Var{P1.roots()[0] } \\
+                x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-P1.b} + \sqrt{\Var{P1.delta}}}{2 \times \Var{P1.a}} = \Var{P1.roots()[1] }
+            \end{eqnarray*}
+
+
+        \Block{elif P1.delta == 0}
+            Comme $\Delta = 0$ donc $\Var{P1.name}$ a une racine
+
+            \begin{eqnarray*}
+                x_1 = \frac{-b}{2a} = \Var{P1.roots()[0]} \\
+            \end{eqnarray*}
+
+
+        \Block{else}
+        Alors $\Delta = \Var{P1.delta} < 0$ donc $\Var{P1.name}$ n'a pas de racine.
+
+        \Block{endif}
+        Comme $a = \Var{P1.a}$, on en déduit le tableau de signe de $\Var{P1.name}$
+            \begin{center}
+                \begin{tikzpicture}
+                    \tkzTabInit[espcl=2]%
+                    {$x$/1, Signe de $\Var{P1.name} $/2}%
+                    \Var{P1.tbl_sgn_header()}
+                    \Var{P1.tbl_sgn()}
+                \end{tikzpicture}
+            \end{center}
+
+        \end{solution}
+    \end{parts}
+
+    \question
+    Appliquer l'algorithme de tri vu en cours à la suite suivante
+    \begin{center}
+    \begin{tabular}{|*{6}{c|}}
+        \hline
+        6914 & 6851 & 6532 & 6884 & 6164 & 6495 \\
+        \hline
+    \end{tabular}
+        
+    \end{center}
+
+
+\end{questions}
+    
+\end{document}
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "master"
+%%% End:
+
