@@ -8,6 +8,8 @@
 \RequirePackage{graphicx}
 \RequirePackage{color}
 
+\Block{from "macros/poly2Deg.tex" import solveEquation}
+
 % Title Page
 \title{Calcul littéral et statistiques}
 \date{\today}
@@ -28,35 +30,7 @@
 
     Solution:
 
-    On commence par calculer le discriminant de $P(x) = \Var{P}$.
-    \begin{eqnarray*}
-        \Delta & = & b^2-4ac \\
-        \Var{P.delta.explain()|calculus(name="\\Delta")}
-    \end{eqnarray*}
-
-    \Block{if P.delta > 0}
-    comme $\Delta = \Var{P.delta} > 0$ donc $P$ a deux racines
-
-    \begin{eqnarray*}
-        x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-P.b} - \sqrt{\Var{P.delta}}}{2 \times \Var{P.a}} = \Var{P.roots()[0] } \\
-        x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-P.b} + \sqrt{\Var{P.delta}}}{2 \times \Var{P.a}} = \Var{P.roots()[1] }
-    \end{eqnarray*}
-
-    Les solutions de l'équation $\Var{P} = 0$ sont donc $\mathcal{S} = \left\{ \Var{min(P.roots())}; \Var{max(P.roots())} \right\}$
-
-    \Block{elif P.delta == 0}
-    Comme $\Delta = 0$ donc $P$ a deux racines
-
-    \begin{eqnarray*}
-        x_1 = \frac{-b}{2a} = \Var{P.roots()[0]} \\
-    \end{eqnarray*}
-
-    La solution de $\Var{P} = 0$ est donc $\mathcal{S} = \left\{ \Var{P.roots()[0]}\right\}$
-
-    \Block{else}
-    Alors $\Delta = \Var{P.delta} < 0$ donc $P$ n'a pas de racine donc l'équation $\var{P} = 0$ n'a pas de solution.
-
-    \Block{endif}
+    \Var{solveEquation(P)}
 
     \bigskip
     ~\dotfill
@@ -74,45 +48,16 @@
 
     On commence par se ramener à une équation de la forme $ax^2+bx+c = 0$.
 
-    \Block{set R = Polynom_deg2((P-Q)._coef)}
+    \Block{set R = P - Q}
 
-    \begin{eqnarray*}
-        \Var{P} = \Var{Q} & \Leftrightarrow & \Var{P} - (\Var{Q}) = 0 \\
+    \begin{align*}
+         & & \Var{P} = \Var{Q} \\
         \Var{R.explain() | calculus(name = "", sep = "\\Leftrightarrow", end = "= 0")}
-    \end{eqnarray*}
+    \end{align*}
 
     On cherche maintenant à résoudre l'équation $\Var{R} = 0$.
     
-    On commence par calculer le discriminant de $R(x) = \Var{R}$.
-    \begin{eqnarray*}
-        \Delta & = & b^2-4ac \\
-        \Var{R.delta.explain()|calculus(name="\\Delta")}
-    \end{eqnarray*}
-    \Block{set Delta = R.delta}
-
-    \Block{if R.delta > 0}
-    comme $\Delta = \Var{R.delta} > 0$ donc $R$ a deux racines
-
-    \begin{eqnarray*}
-        x_1 & = & \frac{-b - \sqrt{\Delta}}{2a} =  \frac{\Var{-R.b} - \sqrt{\Var{Delta}}}{2 \times \Var{R.a}} = \Var{R.roots()[0] } \\
-        x_2 & = & \frac{-b + \sqrt{\Delta}}{2a} =  \frac{\Var{-R.b} + \sqrt{\Var{Delta}}}{2 \times \Var{R.a}} = \Var{R.roots()[1] }
-    \end{eqnarray*}
-
-    Les solutions de l'équation $\Var{R} = 0$ sont donc $\mathcal{S} = \left\{ \Var{min(R.roots())}; \Var{max(R.roots())} \right\}$
-
-    \Block{elif R.delta == 0}
-    Comme $\Delta = 0$ donc $R$ a deux racines
-
-    \begin{eqnarray*}
-        x_1 = \frac{-b}{2a} = \Var{R.roots()[0]} \\
-    \end{eqnarray*}
-
-    La solution de $\Var{R} = 0$ est donc $\mathcal{S} = \left\{ \Var{R.roots()[0]}\right\}$
-
-    \Block{else}
-    Alors $\Delta = \Var{R.delta} < 0$ donc $R$ n'a pas de racine donc l'équation $\Var{R} = 0$ n'a pas de solution.
-
-    \Block{endif}
+    \Var{solveEquation(R)}
 
 \end{document}
 
